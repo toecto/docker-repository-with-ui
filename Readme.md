@@ -5,8 +5,13 @@
 Main features:
 * SSL secured
 * Basic authentification with split access - read only or admin users.
-* Uses docker-compose to run images: nginx, registry, konradkleine/docker-registry-frontend
+* Web interface
 
+Uses public images: registry, konradkleine/docker-registry-frontend
+
+Requirements:
+* docker
+* docker-compose
 
 ## Install and run
 
