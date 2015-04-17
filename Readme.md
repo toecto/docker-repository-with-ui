@@ -1,8 +1,11 @@
 # Private docker registry with UI and read/write access
 ================================
 
-## Split access read only and admin users
-### Uses docker-compose to run images: nginx, registry, konradkleine/docker-registry-frontend
+
+Main features:
+* SSL secured
+* Basic authentification with split access - read only or admin users.
+* Uses docker-compose to run images: nginx, registry, konradkleine/docker-registry-frontend
 
 
 ## Install and run
@@ -11,12 +14,15 @@
 git clone https://github.com/toecto/docker-repository.git
 cd docker-repository
 
-# Install certificates
+##IF you want create your own certificates
+rm builtin-apps/registry-frontend/security/*.pem
+./create-certificats.sh localhost #put your domain
+
+# Install certificates on ALL docker client hosts
 # See cetifacated configuration for more details
 cp $(pwd)/builtin-apps/registry-frontend/security/ca.pem /usr/local/share/ca-certificates/project-ca.crt
 update-ca-certificates
 service docker restart
-
 
 #runnig repo
 docker-compose up
@@ -26,7 +32,7 @@ docker login localhost:5000
 [admin]
 
 docker push localhost:5000/ubuntu # assuming you have it
-docker pull localhost:5000/ubuntu # assuming you have it
+docker pull localhost:5000/ubuntu
 
 ```
 
