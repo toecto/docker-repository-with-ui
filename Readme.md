@@ -58,8 +58,9 @@ Push images, create, remove tags.
 
 Any other useers can only read registry.
 
-###Defaut users
+###Default users
 admin:admin
+
 readonly:readonly
 
 ###Create users
