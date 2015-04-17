@@ -24,7 +24,7 @@ cp $(pwd)/builtin-apps/registry-frontend/security/ca.pem /usr/local/share/ca-cer
 update-ca-certificates
 service docker restart
 
-#runnig repo
+#run repo
 docker-compose up -d
 
 docker login localhost:5000
