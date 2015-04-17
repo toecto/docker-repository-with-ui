@@ -38,7 +38,8 @@ SERVER_CERT_FILE=registry-cert.pem
 
 if [ -f $SERVER_CERT_FILE -a -f $SERVER_KEY_FILE ]; then
     echo Found cert and key files: $SERVER_CERT_FILE $SERVER_KEY_FILE
-    echo Remove them first to create new
+    echo Remove them first to create new:
+    echo ' rm builtin-apps/registry-frontend/security/*.pem'
     exit 1
 fi
 
@@ -59,10 +60,8 @@ echo Creating server certificate and key ...
 required_run openssl genrsa -out $SERVER_KEY_FILE 2048
 required_run openssl req -subj "/CN=$SERVER_HOST" -new -key $SERVER_KEY_FILE -out $SERVER_REQUEST_FILE
 
-echo 'subjectAltName = DNS:localhost' > extfile.cnf
-
 required_run openssl x509 -req -days 365 -in $SERVER_REQUEST_FILE -CA $CA_FILE -CAkey $CA_KEY_FILE \
-    -CAcreateserial -out $SERVER_CERT_FILE -extfile extfile.cnf
+    -CAcreateserial -out $SERVER_CERT_FILE
 
 chmod 400 $SERVER_KEY_FILE
 chmod 444 $SERVER_CERT_FILE
