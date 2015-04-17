@@ -1,0 +1,35 @@
+registryfrontend:
+    build: ./generic-images/nginx
+    ports:
+        - "5000:5000"
+        - "5080:5080"
+    volumes:
+        - builtin-apps/registry-frontend/security:/etc/nginx/security
+        - builtin-apps/registry-frontend/sites-enabled:/etc/nginx/sites-enabled
+    links:
+        - registry
+        - registryui
+    restart: always
+
+registry:
+    image: registry
+    environment:
+        STORAGE_PATH: /var/registry
+        SETTINGS_FLAVOR: local
+        SEARCH_BACKEND: sqlalchemy
+        SQLALCHEMY_INDEX_DATABASE: sqlite:////var/registry/docker-registry.db
+        STANDALONE: true
+    volumes:
+        - /var/docker-registry:/var/registry
+    expose:
+        - "5000"
+    restart: always
+
+registryui:
+    image: konradkleine/docker-registry-frontend
+    environment:
+        ENV_DOCKER_REGISTRY_HOST: registry
+        ENV_DOCKER_REGISTRY_PORT: 5000
+    links:
+        - registry:registry
+    restart: always
