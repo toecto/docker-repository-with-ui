@@ -49,7 +49,7 @@ else
     required_run openssl genrsa -aes256 -out $CA_KEY_FILE 2048
     
     echo Creating CA certificate ...
-    required_run openssl req -new -x509 -days 365 -key $CA_KEY_FILE -sha256 -out $CA_FILE
+    required_run openssl req -new -x509 -subj "/CN=ca.local" -days 365 -key $CA_KEY_FILE -sha256 -out $CA_FILE
 
     echo Created CA certificate and key
 fi

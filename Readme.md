@@ -21,7 +21,7 @@ cd docker-repository
 
 ##IF you want create your own certificates
 rm builtin-apps/registry-frontend/security/*.pem
-./create-certificats.sh localhost #put your domain
+./create-certificates.sh localhost #put your domain
 
 # Install certificates on ALL docker client hosts
 # See cetifacated configuration for more details
@@ -83,14 +83,14 @@ htpasswd registry.htpasswd someuser
 
 ## Certificates
 
-Default certificats are configured to work at localhost. All passwords are `admin`
+Default certificates are configured to work at localhost. All passwords are `admin`
 
 You can create your CA and sign repository cert using:
 
 ```bash
 # Remove existing certs first
 rm builtin-apps/registry-frontend/security/*.pem
-./create-certificats.sh your.domain.name
+./create-certificates.sh your.domain.name
 ```
 
 Register ca.pem sertificate at docker-repository client host:
