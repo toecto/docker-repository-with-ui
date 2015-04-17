@@ -25,7 +25,7 @@ update-ca-certificates
 service docker restart
 
 #runnig repo
-docker-compose up
+docker-compose up -d
 
 docker login localhost:5000
 [admin]
